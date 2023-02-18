@@ -1,0 +1,232 @@
+<html>
+<head>
+<title>Home.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #0000ff;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #808080; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Home.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.example.sos;
+
+<span class="s0">import </span>android.Manifest;
+<span class="s0">import </span>android.app.admin.DeviceAdminReceiver;
+<span class="s0">import </span>android.app.admin.DevicePolicyManager;
+<span class="s0">import </span>android.content.ComponentName;
+<span class="s0">import </span>android.content.Context;
+<span class="s0">import </span>android.content.Intent;
+<span class="s0">import </span>android.content.SharedPreferences;
+<span class="s0">import </span>android.content.pm.PackageManager;
+<span class="s0">import </span>android.net.Uri;
+<span class="s0">import </span>android.support.annotation.NonNull;
+<span class="s0">import </span>android.support.v4.app.ActivityCompat;
+<span class="s0">import </span>android.support.v7.app.AppCompatActivity;
+<span class="s0">import </span>android.os.Bundle;
+<span class="s0">import </span>android.view.Menu;
+<span class="s0">import </span>android.view.MenuItem;
+<span class="s0">import </span>android.view.View;
+<span class="s0">import </span>android.widget.ImageButton;
+<span class="s0">import </span>android.widget.TextView;
+<span class="s0">import </span>android.widget.Toast;
+
+<span class="s0">public class </span>Home <span class="s0">extends </span>AppCompatActivity {
+
+    ImageButton help,about,change;
+    TextView displayPIN;
+    SharedPreferences prefs = <span class="s0">null</span>;
+    String[] permission = <span class="s0">new </span>String[]{
+            Manifest.permission.SEND_SMS,
+            Manifest.permission.READ_SMS,
+            Manifest.permission.RECEIVE_SMS,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.ACCESS_FINE_LOCATION
+    };
+
+    <span class="s0">public static </span>DevicePolicyManager dpm;
+    <span class="s0">public </span>ComponentName cm;
+    <span class="s0">protected static final int </span>REQUEST_ENABLE = <span class="s2">1</span>;
+    <span class="s0">protected static final int </span>SET_PASSWORD = <span class="s2">2</span>;
+
+    @Override
+    <span class="s0">public void </span>onCreate(Bundle savedInstanceState) {
+        <span class="s0">super</span>.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+        prefs = getSharedPreferences(<span class="s3">&quot;DB&quot;</span>,MODE_PRIVATE);
+
+        displayPIN = findViewById(R.id.displayPIN);
+        displayPIN.setText(prefs.getString(<span class="s3">&quot;PIN&quot;</span>,<span class="s3">&quot;Not Set&quot;</span>));
+
+        about = (ImageButton)findViewById(R.id.aboutus);
+
+        about.setOnClickListener(<span class="s0">new </span>View.OnClickListener() {
+            <span class="s0">public void </span>onClick(View arg0) {
+                Intent myIntent = <span class="s0">new </span>Intent(Home.<span class="s0">this</span>, AboutUs.<span class="s0">class</span>);
+                startActivity(myIntent);
+            }
+        });
+
+        help = (ImageButton)findViewById(R.id.help);
+
+        help.setOnClickListener(<span class="s0">new </span>View.OnClickListener() {
+            <span class="s0">public void </span>onClick(View arg0) {
+                Intent myIntent = <span class="s0">new </span>Intent(Home.<span class="s0">this</span>, Help.<span class="s0">class</span>);
+                startActivity(myIntent);
+            }
+        });
+
+
+        change = (ImageButton)findViewById(R.id.changepin);
+
+        change.setOnClickListener(<span class="s0">new </span>View.OnClickListener() {
+            <span class="s0">public void </span>onClick(View arg0) {
+                Intent myIntent = <span class="s0">new </span>Intent(Home.<span class="s0">this</span>, ChangePIN.<span class="s0">class</span>);
+                startActivity(myIntent);
+            }
+        });
+
+    }
+
+
+    @Override
+    <span class="s0">public void </span>onStart()
+    {
+        <span class="s0">super</span>.onStart();
+
+        dpm = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        cm = <span class="s0">new </span>ComponentName(<span class="s0">this</span>, MyDevicePolicyReceiver.<span class="s0">class</span>);
+<span class="s4">//        receiveSMSReciever=new ReceiveSMS();</span>
+//        IntentFilter intentFilter=new IntentFilter(&quot;android.provider.Telephony.SMS_RECEIVED&quot;);
+//        registerReceiver(receiveSMSReciever,intentFilter);
+        <span class="s0">if</span>(dpm != <span class="s0">null </span>&amp;&amp;dpm.isAdminActive(cm)) {
+            <span class="s4">// admin active</span>
+        }
+        <span class="s0">else </span>{
+            Intent intent = <span class="s0">new </span>Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, cm);
+            startActivityForResult(intent, REQUEST_ENABLE);
+        }
+
+        <span class="s0">if </span>(ActivityCompat.checkSelfPermission(<span class="s0">this</span>, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(Home.<span class="s0">this</span>, permission, <span class="s2">100</span>);
+            <span class="s0">return</span>;
+        }
+    }
+
+
+    @Override
+    <span class="s0">protected void </span>onActivityResult(<span class="s0">int </span>requestCode, <span class="s0">int </span>resultCode, Intent data) {
+        <span class="s0">super</span>.onActivityResult(requestCode, resultCode, data);
+        <span class="s0">if </span>(resultCode == RESULT_OK) {
+            <span class="s0">switch </span>(requestCode) {
+                <span class="s0">case </span>REQUEST_ENABLE:
+
+                    dpm.setPasswordQuality(cm, DevicePolicyManager.PASSWORD_QUALITY_SOMETHING);
+                    <span class="s0">boolean </span>isSufficient = dpm.isActivePasswordSufficient();
+                    <span class="s0">if </span>(!isSufficient) {
+                        Intent setPasswordIntent = <span class="s0">new </span>Intent(DevicePolicyManager.ACTION_SET_NEW_PASSWORD);
+                        startActivityForResult(setPasswordIntent, SET_PASSWORD);
+                    }
+                    <span class="s0">break</span>;
+            }
+        }
+    }
+
+    @Override
+    <span class="s0">public void </span>onRequestPermissionsResult(<span class="s0">int </span>requestCode, @NonNull String[] permissions, @NonNull <span class="s0">int</span>[] grantResults) {
+        <span class="s0">super</span>.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        <span class="s0">if </span>(requestCode == <span class="s2">100</span>) {
+            <span class="s4">//check if all permissions are granted</span>
+            <span class="s0">boolean </span>allgranted = <span class="s0">false</span>;
+
+            <span class="s0">for </span>(<span class="s0">int </span>i = <span class="s2">0</span>; i &lt; grantResults.length; i++) {
+                <span class="s0">if </span>(grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                    allgranted = <span class="s0">true</span>;
+                } <span class="s0">else </span>{
+                    allgranted = <span class="s0">false</span>;
+                    <span class="s0">break</span>;
+                }
+            }
+
+            <span class="s0">if </span>(!allgranted) {
+                ActivityCompat.requestPermissions(Home.<span class="s0">this</span>, permission, <span class="s2">100</span>);
+            }
+        }
+    }
+
+    @Override
+    <span class="s0">public boolean </span>onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        <span class="s0">return true</span>;
+    }
+
+    @Override
+    <span class="s0">public boolean </span>onOptionsItemSelected(MenuItem item) {
+        Intent emailIntent = <span class="s0">new </span>Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse(<span class="s3">&quot;mailto:&quot;</span>));
+        emailIntent.setType(<span class="s3">&quot;message/rfc822&quot;</span>);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, <span class="s0">new </span>String[]{<span class="s3">&quot;safetyoversms@gmail.com&quot;</span>});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT,<span class="s3">&quot;Safety Over SMS - Feedback&quot;</span>);
+        <span class="s0">try </span>{
+            startActivity(Intent.createChooser(emailIntent, <span class="s3">&quot;Send mail...&quot;</span>));
+            finish();
+        } <span class="s0">catch </span>(Exception ex) {
+        }
+        <span class="s0">return true</span>;
+    }
+
+
+    <span class="s0">public static class </span>MyDevicePolicyReceiver <span class="s0">extends </span>DeviceAdminReceiver {
+
+        @Override
+        <span class="s0">public void </span>onDisabled(Context context, Intent intent) {
+            Toast.makeText(context, <span class="s3">&quot;Device Admin Disabled&quot;</span>, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        <span class="s0">public void </span>onEnabled(Context context, Intent intent) {
+            Toast.makeText(context, <span class="s3">&quot;Device Admin is now enabled&quot;</span>, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        <span class="s0">public </span>CharSequence onDisableRequested(Context context, Intent intent) {
+            CharSequence disableRequestedSeq = <span class="s3">&quot;Requesting to disable Device Admin&quot;</span>;
+            <span class="s0">return </span>disableRequestedSeq;
+        }
+
+        @Override
+        <span class="s0">public void </span>onPasswordChanged(Context context, Intent intent) {
+        }
+
+        @Override
+        <span class="s0">public void </span>onPasswordExpiring(Context context, Intent intent) {
+        }
+
+        @Override
+        <span class="s0">public void </span>onPasswordFailed(Context context, Intent intent) {
+        }
+
+        @Override
+        <span class="s0">public void </span>onPasswordSucceeded(Context context, Intent intent) {
+        }
+
+        @Override
+        <span class="s0">public void </span>onReceive(Context context, Intent intent) {
+            <span class="s0">super</span>.onReceive(context, intent);
+        }
+    }
+}
+</pre>
+</body>
+</html>

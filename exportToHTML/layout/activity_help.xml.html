@@ -1,0 +1,297 @@
+<html>
+<head>
+<title>activity_help.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000000; font-style: italic;}
+.s1 { color: #0000ff; font-weight: bold;}
+.s2 { color: #000000;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #000080; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+activity_help.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?</span><span class="s1">xml version=</span><span class="s3">&quot;1.0&quot; </span><span class="s1">encoding=</span><span class="s3">&quot;utf-8&quot;</span><span class="s0">?&gt;</span>
+&lt;<span class="s4">ScrollView </span><span class="s1">xmlns:android=</span><span class="s3">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">xmlns:tools=</span><span class="s3">&quot;http://schemas.android.com/tools&quot;</span>
+    <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+    <span class="s1">android:layout_height=</span><span class="s3">&quot;match_parent&quot;</span>
+    <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>&gt;
+
+    &lt;<span class="s4">LinearLayout </span><span class="s1">xmlns:android=</span><span class="s3">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+        <span class="s1">xmlns:tools=</span><span class="s3">&quot;http://schemas.android.com/tools&quot;</span>
+        <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_height=</span><span class="s3">&quot;match_parent&quot;</span>
+        <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+        <span class="s1">android:orientation=</span><span class="s3">&quot;vertical&quot;</span>
+        <span class="s1">tools:context=</span><span class="s3">&quot;.Help&quot;</span>&gt;
+
+        &lt;<span class="s4">LinearLayout</span>
+            <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_margin=</span><span class="s3">&quot;10dp&quot;</span>
+            <span class="s1">android:orientation=</span><span class="s3">&quot;vertical&quot;</span>
+            <span class="s1">android:paddingTop=</span><span class="s3">&quot;15dp&quot;</span>
+            <span class="s1">android:paddingBottom=</span><span class="s3">&quot;30dp&quot;</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_marginBottom=</span><span class="s3">&quot;1dp&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;sans-serif-condensed&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;left&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;SOSCon [pin] [contact_name]&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;28sp&quot; </span>/&gt;
+
+            &lt;<span class="s4">LinearLayout</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;2dp&quot;</span>
+                <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:foreground=</span><span class="s3">&quot;#fafafa&quot;</span>&gt;&lt;/<span class="s4">LinearLayout</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;serif-monospace&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;left&quot;</span>
+                <span class="s1">android:textStyle=</span><span class="s3">&quot;italic&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;This command is used to retrieve important contact number.&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;20sp&quot; </span>/&gt;
+
+        &lt;/<span class="s4">LinearLayout</span>&gt;
+
+        &lt;<span class="s4">LinearLayout</span>
+            <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_margin=</span><span class="s3">&quot;10dp&quot;</span>
+            <span class="s1">android:orientation=</span><span class="s3">&quot;vertical&quot;</span>
+            <span class="s1">android:paddingTop=</span><span class="s3">&quot;15dp&quot;</span>
+            <span class="s1">android:paddingBottom=</span><span class="s3">&quot;30dp&quot;</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_marginBottom=</span><span class="s3">&quot;1dp&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;sans-serif-condensed&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;SOSImei [pin]&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;30sp&quot; </span>/&gt;
+
+            &lt;<span class="s4">LinearLayout</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;2dp&quot;</span>
+                <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:foreground=</span><span class="s3">&quot;#fafafa&quot;</span>&gt;&lt;/<span class="s4">LinearLayout</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;serif-monospace&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;left&quot;</span>
+                <span class="s1">android:textStyle=</span><span class="s3">&quot;italic&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;This command is used to retrieve IMEI number.&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;20sp&quot; </span>/&gt;
+
+        &lt;/<span class="s4">LinearLayout</span>&gt;
+
+        &lt;<span class="s4">LinearLayout</span>
+            <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_margin=</span><span class="s3">&quot;10dp&quot;</span>
+            <span class="s1">android:orientation=</span><span class="s3">&quot;vertical&quot;</span>
+            <span class="s1">android:paddingTop=</span><span class="s3">&quot;15dp&quot;</span>
+            <span class="s1">android:paddingBottom=</span><span class="s3">&quot;30dp&quot;</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_marginBottom=</span><span class="s3">&quot;1dp&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;sans-serif-condensed&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;SOSLocate [pin]&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;30sp&quot; </span>/&gt;
+
+            &lt;<span class="s4">LinearLayout</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;2dp&quot;</span>
+                <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:foreground=</span><span class="s3">&quot;#fafafa&quot;</span>&gt;&lt;/<span class="s4">LinearLayout</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;serif-monospace&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;left&quot;</span>
+                <span class="s1">android:textStyle=</span><span class="s3">&quot;italic&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;This command is used to retrieve the location of the device.&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;20sp&quot; </span>/&gt;
+
+        &lt;/<span class="s4">LinearLayout</span>&gt;
+
+        &lt;<span class="s4">LinearLayout</span>
+            <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_margin=</span><span class="s3">&quot;10dp&quot;</span>
+            <span class="s1">android:orientation=</span><span class="s3">&quot;vertical&quot;</span>
+            <span class="s1">android:paddingTop=</span><span class="s3">&quot;15dp&quot;</span>
+            <span class="s1">android:paddingBottom=</span><span class="s3">&quot;30dp&quot;</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_marginBottom=</span><span class="s3">&quot;1dp&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;sans-serif-condensed&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;SOSRecord [pin] [duration_in_seconds]&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;25sp&quot; </span>/&gt;
+
+            &lt;<span class="s4">LinearLayout</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;2dp&quot;</span>
+                <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:foreground=</span><span class="s3">&quot;#fafafa&quot;</span>&gt;&lt;/<span class="s4">LinearLayout</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;serif-monospace&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;left&quot;</span>
+                <span class="s1">android:textStyle=</span><span class="s3">&quot;italic&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;This command is used to record the audio for specific duration.&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;20sp&quot; </span>/&gt;
+
+        &lt;/<span class="s4">LinearLayout</span>&gt;
+
+        &lt;<span class="s4">LinearLayout</span>
+            <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_margin=</span><span class="s3">&quot;10dp&quot;</span>
+            <span class="s1">android:orientation=</span><span class="s3">&quot;vertical&quot;</span>
+            <span class="s1">android:paddingTop=</span><span class="s3">&quot;15dp&quot;</span>
+            <span class="s1">android:paddingBottom=</span><span class="s3">&quot;30dp&quot;</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_marginBottom=</span><span class="s3">&quot;1dp&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;sans-serif-condensed&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;SOSSMS [pin] [contact_name]\n:[message]&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;25sp&quot; </span>/&gt;
+
+            &lt;<span class="s4">LinearLayout</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;2dp&quot;</span>
+                <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:foreground=</span><span class="s3">&quot;#fafafa&quot;</span>&gt;&lt;/<span class="s4">LinearLayout</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;serif-monospace&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;left&quot;</span>
+                <span class="s1">android:textStyle=</span><span class="s3">&quot;italic&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;This command is used to send SMS to an intended receiver.&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;20sp&quot; </span>/&gt;
+
+        &lt;/<span class="s4">LinearLayout</span>&gt;
+
+        &lt;<span class="s4">LinearLayout</span>
+            <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_margin=</span><span class="s3">&quot;10dp&quot;</span>
+            <span class="s1">android:orientation=</span><span class="s3">&quot;vertical&quot;</span>
+            <span class="s1">android:paddingTop=</span><span class="s3">&quot;15dp&quot;</span>
+            <span class="s1">android:paddingBottom=</span><span class="s3">&quot;30dp&quot;</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_marginBottom=</span><span class="s3">&quot;1dp&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;sans-serif-condensed&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;SOSRing [pin] &quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;30sp&quot; </span>/&gt;
+
+            &lt;<span class="s4">LinearLayout</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;2dp&quot;</span>
+                <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:foreground=</span><span class="s3">&quot;#fafafa&quot;</span>&gt;&lt;/<span class="s4">LinearLayout</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;serif-monospace&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;left&quot;</span>
+                <span class="s1">android:textStyle=</span><span class="s3">&quot;italic&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;This command is used to ring the device.&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;20sp&quot; </span>/&gt;
+
+        &lt;/<span class="s4">LinearLayout</span>&gt;
+
+        &lt;<span class="s4">LinearLayout</span>
+            <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_margin=</span><span class="s3">&quot;10dp&quot;</span>
+            <span class="s1">android:orientation=</span><span class="s3">&quot;vertical&quot;</span>
+            <span class="s1">android:paddingTop=</span><span class="s3">&quot;15dp&quot;</span>
+            <span class="s1">android:paddingBottom=</span><span class="s3">&quot;30dp&quot;</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:layout_marginBottom=</span><span class="s3">&quot;1dp&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;sans-serif-condensed&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;SOSLock [pin]&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;30sp&quot; </span>/&gt;
+
+            &lt;<span class="s4">LinearLayout</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;2dp&quot;</span>
+                <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span>
+                <span class="s1">android:foreground=</span><span class="s3">&quot;#fafafa&quot;</span>&gt;&lt;/<span class="s4">LinearLayout</span>&gt;
+
+            &lt;<span class="s4">TextView</span>
+                <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+                <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+                <span class="s1">android:fontFamily=</span><span class="s3">&quot;serif-monospace&quot;</span>
+                <span class="s1">android:gravity=</span><span class="s3">&quot;left&quot;</span>
+                <span class="s1">android:textStyle=</span><span class="s3">&quot;italic&quot;</span>
+                <span class="s1">android:text=</span><span class="s3">&quot;This command is used to lock the device.&quot;</span>
+                <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+                <span class="s1">android:textSize=</span><span class="s3">&quot;20sp&quot; </span>/&gt;
+
+        &lt;/<span class="s4">LinearLayout</span>&gt;
+
+
+    &lt;/<span class="s4">LinearLayout</span>&gt;
+&lt;/<span class="s4">ScrollView</span>&gt;</pre>
+</body>
+</html>

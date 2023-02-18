@@ -1,0 +1,297 @@
+<html>
+<head>
+<title>ReceiveSMS.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #008000; font-weight: bold;}
+.s3 { color: #0000ff;}
+.s4 { color: #808080; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ReceiveSMS.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.example.sos;
+
+<span class="s0">import </span>android.content.BroadcastReceiver;
+<span class="s0">import </span>android.content.Context;
+<span class="s0">import </span>android.content.Intent;
+<span class="s0">import </span>android.content.SharedPreferences;
+<span class="s0">import </span>android.database.Cursor;
+<span class="s0">import </span>android.location.LocationManager;
+<span class="s0">import </span>android.media.AudioManager;
+<span class="s0">import </span>android.media.MediaRecorder;
+<span class="s0">import </span>android.media.Ringtone;
+<span class="s0">import </span>android.media.RingtoneManager;
+<span class="s0">import </span>android.net.Uri;
+<span class="s0">import </span>android.os.Bundle;
+<span class="s0">import </span>android.os.Environment;
+<span class="s0">import </span>android.os.Looper;
+<span class="s0">import </span>android.provider.ContactsContract;
+<span class="s0">import </span>android.telephony.SmsManager;
+<span class="s0">import </span>android.telephony.SmsMessage;
+<span class="s0">import </span>android.telephony.TelephonyManager;
+<span class="s0">import </span>android.widget.Toast;
+<span class="s0">import </span>java.util.Random;
+
+<span class="s0">import static </span>android.content.Context.MODE_PRIVATE;
+
+<span class="s0">public class </span>ReceiveSMS <span class="s0">extends </span>BroadcastReceiver{
+
+    <span class="s0">public static final </span>String SMS_BUNDLE = <span class="s2">&quot;pdus&quot;</span>;
+    String[] command;
+    TelephonyManager telephonyManager;
+    <span class="s0">static </span>String smsBody, address;
+    String AudioSavePathInDevice = <span class="s0">null</span>;
+    MediaRecorder mediaRecorder;
+    SharedPreferences prefs = <span class="s0">null</span>;
+
+
+    @Override
+    <span class="s0">public void </span>onReceive(Context context, Intent intent) {
+        Bundle intentExtras = intent.getExtras();
+        <span class="s0">if </span>(intentExtras != <span class="s0">null</span>) {
+            Object[] sms = (Object[]) intentExtras.get(SMS_BUNDLE);
+            String smsMessageStr = <span class="s2">&quot;&quot;</span>;
+            <span class="s0">for </span>(<span class="s0">int </span>i = <span class="s3">0</span>; i &lt; sms.length; ++i) {
+                SmsMessage smsMessage = SmsMessage.createFromPdu((<span class="s0">byte</span>[]) sms[i]);
+                telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+
+                smsBody = smsMessage.getMessageBody();
+                address = smsMessage.getOriginatingAddress();
+
+                smsMessageStr += <span class="s2">&quot;SMS From: &quot; </span>+ address + <span class="s2">&quot;</span><span class="s0">\n</span><span class="s2">&quot;</span>;
+                smsMessageStr += smsBody + <span class="s2">&quot;</span><span class="s0">\n</span><span class="s2">&quot;</span>;
+                command = smsBody.split(<span class="s2">&quot; &quot;</span>);
+            }
+
+            prefs = context.getSharedPreferences(<span class="s2">&quot;DB&quot;</span>,MODE_PRIVATE);
+            String pin = prefs.getString(<span class="s2">&quot;PIN&quot;</span>,<span class="s2">&quot;Null&quot;</span>);
+
+            <span class="s0">if</span>(command[<span class="s3">1</span>].equals(pin))
+            {
+                <span class="s0">switch </span>(command[<span class="s3">0</span>]) {
+                    <span class="s0">case </span><span class="s2">&quot;SOSImei&quot;</span>:
+                        sendIMEI(address, telephonyManager);
+                        <span class="s0">break</span>;
+
+                    <span class="s0">case </span><span class="s2">&quot;SOSCon&quot;</span>:
+                        String search = <span class="s2">&quot;&quot;</span>;
+
+                        <span class="s0">for </span>(<span class="s0">int </span>j = <span class="s3">2</span>; j &lt; command.length; j++) {
+                            search += command[j];
+                            <span class="s0">if </span>(!(j == command.length - <span class="s3">1</span>)) {
+                                search += <span class="s2">&quot; &quot;</span>;
+                            }
+                        }
+                        showContact(search, address, context);
+                        <span class="s0">break</span>;
+
+                    <span class="s0">case </span><span class="s2">&quot;SOSRing&quot;</span>:
+
+                        <span class="s0">try </span>{
+
+                            <span class="s0">final </span>AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+                            <span class="s0">if </span>(audioManager.getStreamVolume(AudioManager.STREAM_RING) == <span class="s3">0</span>) {
+                                audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                                audioManager.setStreamVolume(AudioManager.STREAM_RING, audioManager.getStreamMaxVolume(AudioManager.STREAM_RING), <span class="s3">0</span>);
+                            }
+
+                            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+                            <span class="s0">final </span>Ringtone ringtone = RingtoneManager.getRingtone(context, uri);
+                            ringtone.setLooping(<span class="s0">true</span>);
+                            ringtone.play();
+
+                            Thread th = <span class="s0">new </span>Thread(<span class="s0">new </span>Runnable() {
+                                @Override
+                                <span class="s0">public void </span>run() {
+                                    <span class="s0">try </span>{
+                                        Thread.sleep(<span class="s3">30000</span>);  <span class="s4">//30000 is for 30 seconds, 1 sec =1000</span>
+                                        <span class="s0">if </span>(ringtone.isPlaying())
+                                            ringtone.stop();   <span class="s4">// for stopping the ringtone</span>
+                                    } <span class="s0">catch </span>(InterruptedException e) {
+                                    }
+                                }
+                            });
+                            th.start();
+                        } <span class="s0">catch </span>(Exception e) {
+                        }
+                        <span class="s0">break</span>;
+
+                    <span class="s0">case </span><span class="s2">&quot;SOSSMS&quot;</span>:
+                        String searchRec = <span class="s2">&quot;&quot;</span>;
+                        String message = <span class="s2">&quot;&quot;</span>;
+                        <span class="s0">int </span>j;
+
+                        <span class="s0">for </span>(j = <span class="s3">2</span>; j &lt; command.length; j++) {
+                            <span class="s0">if </span>(command[j].charAt(<span class="s3">0</span>) != <span class="s2">':'</span>) {
+                                searchRec += command[j];
+                                <span class="s0">if </span>(!(command[j + <span class="s3">1</span>].charAt(<span class="s3">0</span>) == <span class="s2">':'</span>)) {
+                                    searchRec += <span class="s2">&quot; &quot;</span>;
+                                }
+                            } <span class="s0">else</span>
+                                break;
+                        }
+
+                        <span class="s0">for </span>(<span class="s0">int </span>i = j; i &lt; command.length; i++) {
+                            message += command[i];
+                            <span class="s0">if </span>(i == j) {
+                                message = message.substring(<span class="s3">1</span>, message.length());
+                            }
+
+                            <span class="s0">if </span>(!(i == j - <span class="s3">1</span>)) {
+                                message += <span class="s2">&quot; &quot;</span>;
+                            }
+                        }
+
+                        sendSMS(searchRec, message, context);
+                        <span class="s0">break</span>;
+
+                    <span class="s0">case </span><span class="s2">&quot;SOSRecord&quot;</span>:
+                        <span class="s0">int </span>duration = Integer.parseInt(command[<span class="s3">1</span>]);
+                        recordAudio(context, duration);
+                        <span class="s0">break</span>;
+
+                    <span class="s0">case </span><span class="s2">&quot;SOSLocate&quot;</span>:
+                        context.startService(<span class="s0">new </span>Intent(context,Locate.<span class="s0">class</span>));
+                        <span class="s0">break</span>;
+
+                    <span class="s0">case </span><span class="s2">&quot;SOSLock&quot;</span>:
+                        context.startService(<span class="s0">new </span>Intent(context,Lock.<span class="s0">class</span>));
+                        <span class="s0">break</span>;
+
+                    <span class="s0">default</span>:
+                        <span class="s0">break</span>;
+                }
+            }
+        }
+    }
+
+    <span class="s0">public void </span>sendIMEI(String address, TelephonyManager telephonyManager) {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(address, <span class="s0">null</span>, <span class="s2">&quot;IMEI: &quot; </span>+ telephonyManager.getDeviceId(), <span class="s0">null</span>, <span class="s0">null</span>);
+    }
+
+    <span class="s0">public void </span>showContact(String search, String address, Context context) {
+        Cursor c = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, <span class="s0">null</span>, <span class="s0">null</span>, <span class="s0">null</span>, <span class="s0">null</span>);
+
+        String contact = <span class="s2">&quot;&quot;</span>;
+        String num = <span class="s2">&quot;&quot;</span>;
+        String name = <span class="s2">&quot;&quot;</span>;
+
+        <span class="s0">try </span>{
+            <span class="s0">while </span>(!name.equals(search)) {
+                <span class="s0">assert </span>c != <span class="s0">null</span>;
+                c.moveToNext();
+                name = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            }
+
+            Cursor phones = context.getContentResolver().query(
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI, <span class="s0">null</span>,
+                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + <span class="s2">&quot; = ?&quot;</span>,
+                    <span class="s0">new </span>String[]{name}, <span class="s0">null</span>);
+            <span class="s0">while </span>(phones.moveToNext()) {
+                num += phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)) + <span class="s2">&quot;</span><span class="s0">\n</span><span class="s2">&quot;</span>;
+            }
+        } <span class="s0">catch </span>(Exception e) {
+        }
+
+        <span class="s0">if </span>(name.equals(search)) {
+            contact += name + <span class="s2">&quot;:</span><span class="s0">\n</span><span class="s2">&quot;</span>;
+            contact += num;
+
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(address, <span class="s0">null</span>, contact, <span class="s0">null</span>, <span class="s0">null</span>);
+        }
+        c.close();
+    }
+
+    <span class="s0">public void </span>sendSMS(String searchRec, String message, Context context) {
+        Cursor c = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, <span class="s0">null</span>, <span class="s0">null</span>, <span class="s0">null</span>, <span class="s0">null</span>);
+
+        String num = <span class="s2">&quot;&quot;</span>;
+        String name = <span class="s2">&quot;&quot;</span>;
+
+        <span class="s0">try </span>{
+            <span class="s0">while </span>(!name.equals(searchRec)) {
+                <span class="s0">assert </span>c != <span class="s0">null</span>;
+                c.moveToNext();
+                name = c.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            }
+
+            Cursor phones = context.getContentResolver().query(
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_URI, <span class="s0">null</span>,
+                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + <span class="s2">&quot; = ?&quot;</span>,
+                    <span class="s0">new </span>String[]{name}, <span class="s0">null</span>);
+            <span class="s0">while </span>(phones.moveToNext()) {
+                <span class="s0">int </span>type = phones.getInt(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.TYPE));
+
+                <span class="s0">if </span>(type == <span class="s3">2</span>)
+                    num = phones.getString(c.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            }
+        } <span class="s0">catch </span>(Exception e) {
+        }
+
+        <span class="s0">if </span>(name.equals(searchRec)) {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(num, <span class="s0">null</span>, message, <span class="s0">null</span>, <span class="s0">null</span>);
+        }
+        c.close();
+    }
+
+
+    <span class="s0">public void </span>recordAudio(<span class="s0">final </span>Context context, <span class="s0">final int </span>duration) {
+        Random ran = <span class="s0">new </span>Random();
+        <span class="s0">int </span>r = ran.nextInt();
+        AudioSavePathInDevice =
+                Environment.getExternalStorageDirectory().getAbsolutePath() + <span class="s2">&quot;/&quot; </span>+
+                        <span class="s2">&quot;AudioRecording&quot; </span>+ r + <span class="s2">&quot;.mp3&quot;</span>;
+
+        MediaRecorderReady();
+
+        <span class="s0">try </span>{
+            mediaRecorder.prepare();
+            mediaRecorder.start();
+            Toast.makeText(context, <span class="s2">&quot;Recording Started&quot;</span>, Toast.LENGTH_LONG).show();
+
+            Thread th = <span class="s0">new </span>Thread(<span class="s0">new </span>Runnable() {
+                @Override
+                <span class="s0">public void </span>run() {
+
+                    <span class="s0">try </span>{
+                        Looper.prepare();
+                        Thread.sleep(duration * <span class="s3">1000</span>);  <span class="s4">//30000 is for 30 seconds, 1 sec =1000</span>
+                        mediaRecorder.stop();
+                        Toast.makeText(context, <span class="s2">&quot;Recording Stopped&quot;</span>, Toast.LENGTH_LONG).show();
+                    } <span class="s0">catch </span>(InterruptedException e) {
+                    }
+                }
+            });
+            th.start();
+
+        } <span class="s0">catch </span>(Exception e) {
+        }
+    }
+
+    <span class="s0">public void </span>MediaRecorderReady() {
+        mediaRecorder = <span class="s0">new </span>MediaRecorder();
+        mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
+        mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+        mediaRecorder.setOutputFile(AudioSavePathInDevice);
+    }
+
+    <span class="s0">public static void </span>sendLocation(String url)
+    {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(address, <span class="s0">null</span>, url, <span class="s0">null</span>, <span class="s0">null</span>);
+    }
+}
+</pre>
+</body>
+</html>

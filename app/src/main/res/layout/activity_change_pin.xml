@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#455a64"
+    tools:context=".ChangePIN">
+
+    <TextView
+        android:id="@+id/newPIN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fafafa"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="181dp"
+        android:layout_marginEnd="15dp"
+        android:text="New PIN"
+        app:layout_constraintEnd_toStartOf="@+id/enterPIN"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/enterPIN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="number"
+        android:text=""
+        app:layout_constraintBaseline_toBaselineOf="@+id/newPIN"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ques" />
+
+    <TextView
+        android:id="@+id/ques"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:layout_marginTop="280dp"
+        android:layout_marginEnd="32dp"
+        android:textColor="#fafafa"
+        app:layout_constraintEnd_toStartOf="@+id/enterAnswer"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/enterAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBaseline_toBaselineOf="@+id/ques"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="84dp"
+        android:background="@color/colorAccent"
+        android:onClick="change_pin"
+        android:text="Change PIN"
+        app:layout_constraintStart_toEndOf="@+id/ques"
+        app:layout_constraintTop_toBottomOf="@+id/enterAnswer" />
+
+</android.support.constraint.ConstraintLayout>

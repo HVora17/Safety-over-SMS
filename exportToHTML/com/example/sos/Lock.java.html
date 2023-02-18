@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Lock.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Lock.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.example.sos;
+
+<span class="s0">import </span>android.app.Service;
+<span class="s0">import </span>android.app.admin.DevicePolicyManager;
+<span class="s0">import </span>android.content.ComponentName;
+<span class="s0">import </span>android.content.Context;
+<span class="s0">import </span>android.content.Intent;
+<span class="s0">import </span>android.os.IBinder;
+
+<span class="s0">public class </span>Lock <span class="s0">extends </span>Service {
+    DevicePolicyManager devicePolicyManager;
+    ComponentName componentName;
+
+    @Override
+    <span class="s0">public </span>IBinder onBind(Intent intent) {
+
+        <span class="s0">return null</span>;
+    }
+
+    @Override
+    <span class="s0">public int </span>onStartCommand(Intent intent, <span class="s0">int </span>flags, <span class="s0">int </span>startid) {
+        devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        componentName = <span class="s0">new </span>ComponentName(<span class="s0">this</span>, Home.MyDevicePolicyReceiver.<span class="s0">class</span>);
+        devicePolicyManager.lockNow();
+        stopSelf();
+        <span class="s0">return </span>START_STICKY;
+    }
+}
+
+</pre>
+</body>
+</html>

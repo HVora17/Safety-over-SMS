@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>Question.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000080; font-weight: bold;}
+.s1 { color: #000000;}
+.s2 { color: #008000; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Question.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span>com.example.sos;
+
+<span class="s0">import </span>android.content.Intent;
+<span class="s0">import </span>android.content.SharedPreferences;
+<span class="s0">import </span>android.content.pm.PackageInstaller;
+<span class="s0">import </span>android.net.Uri;
+<span class="s0">import </span>android.os.Bundle;
+<span class="s0">import </span>android.support.v7.app.AppCompatActivity;
+<span class="s0">import </span>android.view.Menu;
+<span class="s0">import </span>android.view.MenuItem;
+<span class="s0">import </span>android.view.View;
+<span class="s0">import </span>android.widget.EditText;
+<span class="s0">import </span>android.widget.Toast;
+
+
+<span class="s0">public class </span>Question <span class="s0">extends </span>AppCompatActivity {
+
+    SharedPreferences prefs = <span class="s0">null</span>;
+    EditText question = <span class="s0">null</span>;
+    EditText answer = <span class="s0">null</span>;
+
+    @Override
+    <span class="s0">protected void </span>onCreate(Bundle savedInstanceState) {
+        <span class="s0">super</span>.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_question);
+
+        question = (EditText) findViewById(R.id.editQuestion);
+        answer = (EditText) findViewById(R.id.editAnswer);
+        prefs = getSharedPreferences(<span class="s2">&quot;DB&quot;</span>, MODE_PRIVATE);
+
+        <span class="s0">if</span>(!(prefs.getString(<span class="s2">&quot;Question&quot;</span>,<span class="s2">&quot;null&quot;</span>).equals(<span class="s2">&quot;null&quot;</span>)))
+        {
+            Intent i = <span class="s0">new </span>Intent(Question.<span class="s0">this</span>,PIN.<span class="s0">class</span>);
+            startActivity(i);
+        }
+    }
+
+    @Override
+    <span class="s0">public boolean </span>onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        <span class="s0">return true</span>;
+    }
+
+    @Override
+    <span class="s0">public boolean </span>onOptionsItemSelected(MenuItem item) {
+        Intent emailIntent = <span class="s0">new </span>Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse(<span class="s2">&quot;mailto:&quot;</span>));
+        emailIntent.setType(<span class="s2">&quot;message/rfc822&quot;</span>);
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, <span class="s0">new </span>String[]{<span class="s2">&quot;safetyoversms@gmail.com&quot;</span>});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT,<span class="s2">&quot;Safety Over SMS - Feedback&quot;</span>);
+        <span class="s0">try </span>{
+            startActivity(Intent.createChooser(emailIntent, <span class="s2">&quot;Send mail...&quot;</span>));
+            finish();
+        } <span class="s0">catch </span>(Exception ex) {
+        }
+        <span class="s0">return true</span>;
+    }
+
+    <span class="s0">public void </span>btn_click(View view)
+    {
+
+        <span class="s0">if</span>(!(question.getText().toString().equals(<span class="s2">&quot;&quot;</span>) &amp;&amp; answer.getText().toString().equals(<span class="s2">&quot;&quot;</span>)))
+        {
+            prefs = getSharedPreferences(<span class="s2">&quot;DB&quot;</span>, MODE_PRIVATE);
+            prefs.edit().putString(<span class="s2">&quot;Question&quot;</span>, question.getText().toString()).apply();
+            prefs.edit().putString(<span class="s2">&quot;Answer&quot;</span>, answer.getText().toString()).apply();
+
+            Intent i = <span class="s0">new </span>Intent(Question.<span class="s0">this</span>,PIN.<span class="s0">class</span>);
+            startActivity(i);
+        }
+        <span class="s0">else</span>
+        {
+            Toast.makeText(getApplicationContext(),<span class="s2">&quot;Enter Security Question and Answer&quot;</span>,Toast.LENGTH_LONG).show();
+        }
+    }
+
+}</pre>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<html>
+<head>
+<title>activity_home.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000000; font-style: italic;}
+.s1 { color: #0000ff; font-weight: bold;}
+.s2 { color: #000000;}
+.s3 { color: #008000; font-weight: bold;}
+.s4 { color: #000080; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+activity_home.xml</font>
+</center></td></tr></table>
+<pre><span class="s0">&lt;?</span><span class="s1">xml version=</span><span class="s3">&quot;1.0&quot; </span><span class="s1">encoding=</span><span class="s3">&quot;utf-8&quot;</span><span class="s0">?&gt;</span>
+
+&lt;<span class="s4">LinearLayout </span><span class="s1">xmlns:android=</span><span class="s3">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+    <span class="s1">android:layout_height=</span><span class="s3">&quot;match_parent&quot;</span>
+    <span class="s1">android:orientation=</span><span class="s3">&quot;vertical&quot;</span>
+    <span class="s1">android:layout_marginBottom=</span><span class="s3">&quot;10dp&quot;</span>
+    <span class="s1">android:layout_margin=</span><span class="s3">&quot;1dp&quot;</span>
+    <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>&gt;
+
+    &lt;<span class="s4">ImageView</span>
+        <span class="s1">android:layout_width=</span><span class="s3">&quot;wrap_content&quot;</span>
+        <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+        <span class="s1">android:layout_margin=</span><span class="s3">&quot;10dp&quot;</span>
+        <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+        <span class="s1">android:padding=</span><span class="s3">&quot;15dp&quot;</span>
+        <span class="s1">android:src=</span><span class="s3">&quot;@drawable/sos&quot; </span>/&gt;
+    &lt;<span class="s4">LinearLayout</span>
+        <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_height=</span><span class="s3">&quot;0dp&quot;</span>
+        <span class="s1">android:layout_weight=</span><span class="s3">&quot;1&quot;</span>
+        <span class="s1">android:orientation=</span><span class="s3">&quot;horizontal&quot;</span>&gt;
+
+
+        &lt;<span class="s4">TextView</span>
+            <span class="s1">android:id=</span><span class="s3">&quot;@+id/textview1&quot;</span>
+            <span class="s1">android:layout_width=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_gravity=</span><span class="s3">&quot;end&quot;</span>
+            <span class="s1">android:layout_weight=</span><span class="s3">&quot;0.25&quot;</span>
+            <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+            <span class="s1">android:fontFamily=</span><span class="s3">&quot;monospace&quot;</span>
+            <span class="s1">android:paddingTop=</span><span class="s3">&quot;5dp&quot;</span>
+            <span class="s1">android:shadowColor=</span><span class="s3">&quot;#eeeeee&quot;</span>
+            <span class="s1">android:text=</span><span class="s3">&quot;PIN : &quot;</span>
+            <span class="s1">android:textAlignment=</span><span class="s3">&quot;textEnd&quot;</span>
+            <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+            <span class="s1">android:textFontWeight=</span><span class="s3">&quot;1&quot;</span>
+            <span class="s1">android:textSize=</span><span class="s3">&quot;30dp&quot;</span>
+            <span class="s1">android:textStyle=</span><span class="s3">&quot;bold&quot; </span>/&gt;
+
+        &lt;<span class="s4">TextView</span>
+            <span class="s1">android:id=</span><span class="s3">&quot;@+id/displayPIN&quot;</span>
+            <span class="s1">android:layout_width=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:paddingTop=</span><span class="s3">&quot;10dp&quot;</span>
+            <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_weight=</span><span class="s3">&quot;0.25&quot;</span>
+            <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+            <span class="s1">android:layout_gravity=</span><span class="s3">&quot;start&quot;</span>
+            <span class="s1">android:paddingLeft=</span><span class="s3">&quot;5dp&quot;</span>
+            <span class="s1">android:shadowColor=</span><span class="s3">&quot;#eeeeee&quot;</span>
+            <span class="s1">android:textAlignment=</span><span class="s3">&quot;textStart&quot;</span>
+            <span class="s1">android:textColor=</span><span class="s3">&quot;#fafafa&quot;</span>
+            <span class="s1">android:textFontWeight=</span><span class="s3">&quot;1&quot;</span>
+            <span class="s1">android:textSize=</span><span class="s3">&quot;25dp&quot;</span>
+            <span class="s1">android:textStyle=</span><span class="s3">&quot;italic&quot; </span>/&gt;
+
+
+    &lt;/<span class="s4">LinearLayout</span>&gt;
+
+
+    &lt;<span class="s4">ImageButton</span>
+        <span class="s1">android:id=</span><span class="s3">&quot;@+id/changepin&quot;</span>
+        <span class="s1">android:layout_width=</span><span class="s3">&quot;fill_parent&quot;</span>
+        <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+        <span class="s1">android:layout_margin=</span><span class="s3">&quot;1dp&quot;</span>
+        <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+        <span class="s1">android:cropToPadding=</span><span class="s3">&quot;false&quot;</span>
+        <span class="s1">android:padding=</span><span class="s3">&quot;2dp&quot;</span>
+        <span class="s1">android:paddingBottom=</span><span class="s3">&quot;10dp&quot;</span>
+        <span class="s1">android:src=</span><span class="s3">&quot;@drawable/chp&quot; </span>/&gt;
+
+    &lt;<span class="s4">LinearLayout</span>
+        <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+        <span class="s1">android:layout_height=</span><span class="s3">&quot;0dp&quot;</span>
+        <span class="s1">android:layout_weight=</span><span class="s3">&quot;1&quot;</span>
+        <span class="s1">android:orientation=</span><span class="s3">&quot;horizontal&quot;</span>&gt;
+
+        &lt;<span class="s4">ImageButton</span>
+            <span class="s1">android:id=</span><span class="s3">&quot;@+id/aboutus&quot;</span>
+            <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_margin=</span><span class="s3">&quot;1dp&quot;</span>
+            <span class="s1">android:layout_weight=</span><span class="s3">&quot;0.5&quot;</span>
+            <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+            <span class="s1">android:cropToPadding=</span><span class="s3">&quot;false&quot;</span>
+            <span class="s1">android:src=</span><span class="s3">&quot;@drawable/abu&quot; </span>/&gt;
+
+        &lt;<span class="s4">ImageButton</span>
+            <span class="s1">android:id=</span><span class="s3">&quot;@+id/help&quot;</span>
+            <span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span>
+            <span class="s1">android:layout_height=</span><span class="s3">&quot;wrap_content&quot;</span>
+            <span class="s1">android:layout_margin=</span><span class="s3">&quot;1dp&quot;</span>
+            <span class="s1">android:layout_weight=</span><span class="s3">&quot;0.5&quot;</span>
+            <span class="s1">android:background=</span><span class="s3">&quot;#455a64&quot;</span>
+            <span class="s1">android:cropToPadding=</span><span class="s3">&quot;false&quot;</span>
+            <span class="s1">android:src=</span><span class="s3">&quot;@drawable/h&quot; </span>/&gt;
+    &lt;/<span class="s4">LinearLayout</span>&gt;
+
+&lt;/<span class="s4">LinearLayout</span>&gt;</pre>
+</body>
+</html>
